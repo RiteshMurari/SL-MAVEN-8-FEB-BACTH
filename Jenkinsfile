@@ -3,7 +3,7 @@ kpipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/your/repository.git'
+                git 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH/tree/feature-login'
             }
         }
         stage('Build') {
