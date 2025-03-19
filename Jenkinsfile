@@ -1,34 +1,48 @@
-pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'feature-login', url: 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH.git'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deployment stage - add actual deployment command here'
-                // Example: sh 'mvn deploy'
-            }
-        }
-    }
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed!'
-        }
-    }
+pipeline
+{
+	agent any
+		tools
+		{
+			maven 'MAVEN_HOME'
+		}
+		stages
+		{
+			stage('Welcome Stage')
+			{
+				steps
+				{
+					echo 'Welcome to Pipeline'
+				}
+			}
+			
+			stage('Clean Stage')
+			{
+				steps
+				{
+					bat 'mvn clean'
+				}
+			}
+			stage('Build Stage')
+			{
+				steps
+				{
+					bat 'mvn install'
+				}
+			}
+			stage('Build Success')
+			{
+				steps
+				{
+					echo 'Build Success'
+				}
+			}
+			stage('Finish Stage')
+			{
+				steps
+				{
+					echo 'Finish Stage'
+				}
+			}
+			
+		}
 }
