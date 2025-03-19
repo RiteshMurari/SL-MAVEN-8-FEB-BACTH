@@ -1,22 +1,34 @@
-pipeline {
-    agent {
-        label 'windows'
-    }
+kpipeline {
+    agent any
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH'
+                git 'https://github.com/your/repository.git'
             }
         }
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Example: sh 'mvn deploy'
             }
         }
     }
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
+
