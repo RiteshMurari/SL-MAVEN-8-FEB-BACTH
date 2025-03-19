@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH/tree/feature-login'
+                git 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH'
             }
         }
         stage('Build') {
