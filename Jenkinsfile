@@ -1,51 +1,33 @@
 pipeline {
     agent any
-
-    tools {
-        maven 'MAVEN_HOME'  // Ensure this matches your Jenkins Maven configuration
-    }
-
     stages {
-        stage('Welcome Stage') {
+        stage('Checkout') {
             steps {
-                echo 'Welcome to Pipeline'
+                git 'https://github.com/RiteshMurari/SL-MAVEN-8-FEB-BACTH/tree/feature-login'
             }
         }
-
-        stage('Clean Stage') {
+        stage('Build') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn clean'
-                    } else {
-                        bat 'mvn clean'
-                    }
-                }
+                sh 'mvn clean package'
             }
         }
-
-        stage('Build Stage') {
+        stage('Test') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn install'
-                    } else {
-                        bat 'mvn install'
-                    }
-                }
+                sh 'mvn test'
             }
         }
-
-        stage('Build Success') {
+        stage('Deploy') {
             steps {
-                echo 'Build Success'
+                // Example: sh 'mvn deploy'
             }
         }
-
-        stage('Finish Stage') {
-            steps {
-                echo 'Finish Stage'
-            }
+    }
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
