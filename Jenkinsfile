@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'windows'
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -8,24 +10,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn clean package'  // Linux/Docker
-                    } else {
-                        bat 'mvn clean package' // Windows
-                    }
-                }
+                bat 'mvn clean package'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    if (isUnix()) {
-                        sh 'mvn test'  
-                    } else {
-                        bat 'mvn test'
-                    }
-                }
+                bat 'mvn test'
             }
         }
     }
